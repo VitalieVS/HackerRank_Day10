@@ -3,10 +3,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-
-    private static StringBuilder toBinary(int n) {
+    private static StringBuilder toBinary(Long n) {
         StringBuilder result = new StringBuilder();
-        int currNumber = n;
+        Long currNumber = n;
 
         while (currNumber != 0) {
             result.append(currNumber % 2);
@@ -16,26 +15,20 @@ public class Main {
     }
 
     private static int consecutiveOneCount(StringBuilder binaryString) {
-      int max = 0;
-      int count = 0;
-         for (int i = 0; i < binaryString.length(); i++) {
-             if (binaryString.charAt(i) == '1') {
-                 count++;
-             } else {
-                 if (count > max) {
-                     max = count;
-                     count = 0;
-                 }
-             }
-         }
+        String[] result = binaryString.toString().split("0");
+        int max = result[0].length();
 
-         return max;
+        for (String elem : result) {
+            if (elem.length() > max) max = elem.length();
+        }
+
+        return max;
     }
 
     public static void main(String[] args) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
-            int n = Integer.parseInt(br.readLine());
+            Long n = Long.parseLong(br.readLine());
             System.out.print(consecutiveOneCount(toBinary(n)));
         } catch (IOException e) {
             e.printStackTrace();
