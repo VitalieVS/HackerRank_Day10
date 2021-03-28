@@ -16,11 +16,28 @@ public class Main {
         return result.reverse();
     }
 
+    private static int consecutiveOneCount(StringBuilder binaryString) {
+      int max = 0;
+      int count = 0;
+         for (int i = 0; i < binaryString.length(); i++) {
+             if (binaryString.charAt(i) == '1') {
+                 count++;
+             } else {
+                 if (count > max) {
+                     max = count;
+                     count = 0;
+                 }
+             }
+         }
+
+         return max;
+    }
+
     public static void main(String[] args) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             int n = Integer.parseInt(br.readLine());
-            System.out.print(toBinary(n));
+            System.out.print(consecutiveOneCount(toBinary(n)));
         } catch (IOException e) {
             e.printStackTrace();
         }
